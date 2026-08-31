@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>1 ကျပ်နဲ့ ကူညီကြမယ်</title>
+  <title>ကူညီကြမယ်</title>
 
   <style>
     body {
@@ -16,7 +16,7 @@
 
     .box {
       max-width: 430px;
-      margin: 50px auto;
+      margin: 40px auto;
       background: white;
       padding: 30px 20px;
       border-radius: 20px;
@@ -28,7 +28,7 @@
     }
 
     .number {
-      font-size: 25px;
+      font-size: 23px;
       font-weight: bold;
       margin: 20px 0;
       padding: 15px;
@@ -36,29 +36,52 @@
       border-radius: 12px;
     }
 
+    .amounts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
     button {
-      width: 100%;
       padding: 15px;
-      margin: 8px 0;
       border: none;
       border-radius: 12px;
-      font-size: 18px;
+      font-size: 17px;
       cursor: pointer;
     }
 
+    .amount {
+      background: #eee;
+    }
+
+    .amount:hover {
+      background: #ddd;
+    }
+
     .copy {
+      width: 100%;
       background: #222;
       color: white;
+      margin-bottom: 10px;
     }
 
     .wave {
+      width: 100%;
       background: #6f42c1;
       color: white;
+      margin-bottom: 10px;
     }
 
     .done {
-      background: #eee;
-      color: #222;
+      width: 100%;
+      background: #ddd;
+    }
+
+    #selected {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 15px 0;
     }
 
     #message {
@@ -73,16 +96,16 @@
 
   <div class="box">
 
-    <h1>❤️ 1 ကျပ်နဲ့ ကူညီကြမယ်</h1>
+    <h1>❤️ ကူညီကြမယ်</h1>
 
     <p>
-      လူတစ်ယောက်စီက 1 ကျပ်နဲ့<br>
+      မိမိအဆင်ပြေသလောက်<br>
       ကူညီပေးနိုင်ပါတယ်။
     </p>
 
-    <h3>Wave Pay နံပါတ်</h3>
+    <h3>Wave Pay ဖုန်းနံပါတ်</h3>
 
-    <!-- ဒီနေရာမှာ ကိုယ့် Wave Pay ဖုန်းနံပါတ်ထည့်ပါ -->
+    <!-- ဒီနေရာမှာ ကိုယ့် Wave Pay နံပါတ်ထည့်ပါ -->
     <div class="number" id="phone">
       09687352668
     </div>
@@ -90,6 +113,21 @@
     <button class="copy" onclick="copyNumber()">
       📋 ဖုန်းနံပါတ်ကူးမယ်
     </button>
+
+    <h3>ကူညီမယ့်ပမာဏ ရွေးပါ</h3>
+
+    <div class="amounts">
+      <button class="amount" onclick="selectAmount(1)">1 ကျပ်</button>
+      <button class="amount" onclick="selectAmount(5)">5 ကျပ်</button>
+      <button class="amount" onclick="selectAmount(10)">10 ကျပ်</button>
+      <button class="amount" onclick="selectAmount(20)">20 ကျပ်</button>
+      <button class="amount" onclick="selectAmount(50)">50 ကျပ်</button>
+      <button class="amount" onclick="selectAmount(100)">100 ကျပ်</button>
+    </div>
+
+    <div id="selected">
+      ပမာဏ မရွေးရသေးပါ
+    </div>
 
     <button class="wave" onclick="openWave()">
       💜 Wave Pay ဖွင့်မယ်
@@ -105,6 +143,15 @@
 
   <script>
 
+    let selectedAmount = 0;
+
+    function selectAmount(amount) {
+      selectedAmount = amount;
+
+      document.getElementById("selected").innerHTML =
+        "ရွေးထားသောပမာဏ — " + amount + " ကျပ်";
+    }
+
     function copyNumber() {
       const number = document.getElementById("phone").innerText;
 
@@ -118,11 +165,18 @@
     }
 
     function done() {
+
+      if (selectedAmount === 0) {
+        alert("အရင်ဆုံး ကူညီမယ့်ပမာဏကို ရွေးပါ။");
+        return;
+      }
+
       document.getElementById("message").style.display = "block";
 
       document.getElementById("message").innerHTML =
-        "❤️ ကျေးဇူးတင်ပါတယ်။<br><br>" +
-        "ငွေလွှဲပြီးပါပြီဆိုရင် ကျေးဇူးပြု၍ စောင့်ပေးပါ။";
+        "❤️ " + selectedAmount +
+        " ကျပ် ကူညီရန် ရွေးထားပါတယ်။<br><br>" +
+        "ကျေးဇူးတင်ပါတယ်။";
     }
 
   </script>
